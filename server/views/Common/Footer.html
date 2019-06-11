@@ -1,0 +1,40 @@
+<? for(var i=0; i<scripts.length; i++) { ?>
+    <script type="text/javascript" src="<?= webresourceBaseUrl + 'js/' + scripts[i] + '?v=' + version ?>"></script>
+<? } ?>
+
+<script type="text/javascript" src="<?= aresPrefix ?>/js/commonUtil.js?v=<?= version ?>" pd_init="1"></script>
+
+<? if (isRelease) { ?>
+    <script type="text/javascript" src="<?= aresPrefix ?>/js/react.production.min.js?v=<?= version ?>"></script>
+    <script type="text/javascript" src="<?= aresPrefix ?>/js/react-dom.production.min.js?v=<?= version ?>"></script>
+    <script type="text/javascript" src="<?= aresPrefix ?>/js/vendor.a12694cb16fe497c7e63.js?v=<?= version ?>"></script>
+<? } else { ?>
+    <script type="text/javascript" src="<?= aresPrefix ?>/js/vendor.453dc92ef6a2d33a9de0.js?v=<?= version ?>"></script>
+<? } ?>
+
+<? if (react) { ?>
+    <? if (isRelease) { ?>
+        <? if(controllerFlag) { ?>
+            <? for(var i=0; i < bundleUtil[controller.toLowerCase()].length; i++) { ?>
+                <script src="<?= aresPrefix ?>/page/<?= bundleUtil[controller.toLowerCase()][i] ?>/bundle.js?v=<?= version ?>" type="text/javascript"></script>
+            <? } ?>
+        <? } else { ?>
+            <? for(var i=0; i < bundleUtil['react'].length; i++) { ?>
+                <script src="<?= aresPrefix ?>/page/<?= bundleUtil['react'][i] ?>/bundle.js?v=<?= version ?>" type="text/javascript"></script>
+            <? } ?>
+        <? } ?>
+    <? } ?>
+
+    <? if(controllerFlag) { ?>
+        <script src="<?= aresPrefix ?>/page/<?= controller.toLowerCase() ?>/bundle.js?v=<?= version ?>" type="text/javascript"></script>
+    <? } else { ?>
+        <script src="<?= aresPrefix ?>/page/react/bundle.js?v=<?= version ?>" type="text/javascript"></script>
+    <? } ?>
+<? } ?>
+
+<? if (env !== "production" && reload === true) { ?>
+    <script src="/reload/reload.js"></script>
+<? } ?>
+
+</body>
+</html>
