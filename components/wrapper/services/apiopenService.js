@@ -7,9 +7,7 @@ var serviceObj = {};
 
 serviceObj.getApiopenVideoRecommend = function(id) {
     return new Promise((resolve, reject)=>{
-        if(window.isStatic !== 'true'){
-            fetch.ajaxDirectGetPromise('https://api.apiopen.top/videoRecommend?id=' + id, {}).then(resolve).catch(reject);
-        }
+        fetch.ajaxDirectGetPromise('https://api.apiopen.top/videoRecommend?id=' + id, {}).then(resolve).catch(reject);
     });
 };
 
