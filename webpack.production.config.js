@@ -6,6 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var controllerConfig = require('./server/config/controller');
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var entryObj = {};
 _.each(controllerConfig.entrys, function(item, index){
@@ -72,6 +73,7 @@ var productionConfig = {
             true
         ),
         new UglifyJSPlugin(),
+        //new BundleAnalyzerPlugin(),
         new OptimizeCssAssetsPlugin()
     ]
 };
