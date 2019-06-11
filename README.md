@@ -1,8 +1,7 @@
 # 开发 
-webpack --config webpack.vendor.config.js  生成 manifest.json, ./public/js/vendor.*.js
-npm run configgen uat (or pro/prd) 设置后端服务环境 UAT (OR PRO/PRD)
-npm start => webpack.config
-npm run production => webpack.production.config
+1. webpack --config webpack.vendor.config.js  生成 manifest.json, ./public/js/vendor.*.js
+2. npm start => webpack.config
+3. npm run production => webpack.production.config
 
 
 # 发布顺序 (需在 release* 分支发布)
@@ -16,24 +15,24 @@ npm run production => webpack.production.config
    
 
 # https
-cd server
-openssl genrsa -out privatekey.pem 1024
-openssl req -new -key privatekey.pem -out certrequest.csr 
-openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certrequest.pem
+1. cd server
+2. openssl genrsa -out privatekey.pem 1024
+3. openssl req -new -key privatekey.pem -out certrequest.csr 
+4. openssl x509 -req -in certrequest.csr -signkey privatekey.pem -out certrequest.pem
 
 # LESS
-代码写在 client/less 目录下
+1. 代码写在 client/less 目录下
 
 # React/Redux 组件
-代码写在 components/wrapper/redux 目录下, 其中 common 目录是通用组件目录
+1. 代码写在 components/wrapper/redux 目录下, 其中 common 目录是通用组件目录
 
 # 配置
-代码写在 components/wrapper/config 目录下, index.js 是入口
-{ githubZeit: { action: 'github/zeit', component: null, apiFunc: function(fetch, req, res){} } }
-obj.key => action 内容一致，按驼峰规则拼接
+1. 代码写在 components/wrapper/config 目录下, index.js 是入口
+2. { githubZeit: { action: 'github/zeit', component: null, apiFunc: function(fetch, req, res){} } }
+3. obj.key => action 内容一致，按驼峰规则拼接
 
 # Node API
-代码写在 server/routes/api 目录下，index.js 是入口
+1. 代码写在 server/routes/api 目录下，index.js 是入口
 
 
     
