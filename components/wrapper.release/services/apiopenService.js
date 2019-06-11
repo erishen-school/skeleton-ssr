@@ -17,9 +17,7 @@ var serviceObj = {}; /**
 
 serviceObj.getApiopenVideoRecommend = function (id) {
     return new Promise(function (resolve, reject) {
-        if (window.isStatic !== 'true') {
-            _fetch2.default.ajaxDirectGetPromise('https://api.apiopen.top/videoRecommend?id=' + id, {}).then(resolve).catch(reject);
-        }
+        _fetch2.default.ajaxDirectGetPromise('https://api.apiopen.top/videoRecommend?id=' + id, {}).then(resolve).catch(reject);
     });
 };
 
