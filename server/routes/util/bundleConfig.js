@@ -3,15 +3,19 @@
  */
 export default {
     react:[
-        'vendors~apiopen~github~react',
+        'vendors~apiopen~github~math~react',
         'vendors~react'
     ],
     github: [
-        'vendors~apiopen~github~react',
-        'apiopen~github'
+        'vendors~apiopen~github~math~react',
+        'apiopen~github~math'
     ],
     apiopen: [
-        'vendors~apiopen~github~react',
-        'apiopen~github'
+        'vendors~apiopen~github~math~react',
+        'apiopen~github~math'
+    ],
+    math: [
+        'vendors~apiopen~github~math~react',
+        'apiopen~github~math'
     ]
 };

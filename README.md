@@ -34,5 +34,22 @@
 # Node API
 1. 代码写在 server/routes/api 目录下，index.js 是入口
 
+# URL 说明 http://localhost:8080/webapp/skeleton/github/zeit
+1. PORT: 8080 => package.json - config - port
+2. webapp/skeleton => server - config - project.js - serverPrefix
+3. github => 
+    client/config/github.js
+    client/less/github_all.less
+    client/less/github
+    client/page/github
+    components/wrapper/redux/github
+    server/config/controller.js
+    server/routes/util/bundleConfig.js
+    server/routes/util/config.js
+    
+
+
+
+
 
     

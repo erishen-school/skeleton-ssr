@@ -8,11 +8,11 @@ import H1SkeletonComponent from '../../common/H1SkeletonComponent';
 import BasePageComponent from '../../common/BasePageComponent';
 import util from '../../../helper/util'
 
-export default class ApiopenVideoRecommend extends BasePageComponent {
+export default class MathQuiz extends BasePageComponent {
     constructor(props) {
         super(props);
         this.setRedux(reducers, actions);
-        console.log('ApiopenVideoRecommend', util.getLocationPrefix(), util.getUrlPrefix());
+        console.log('MathQuiz', util.getLocationPrefix(), util.getUrlPrefix());
     }
 
     componentDidMount() {
@@ -31,7 +31,7 @@ export default class ApiopenVideoRecommend extends BasePageComponent {
         console.log('recommendObj', recommendObj, loadingStatus);
 
         return (
-            <div class="apiopen-videoRecommend">
+            <div class="math-quiz">
                 <H1SkeletonComponent item={recommendObj.length} loadingStatus={loadingStatus} />
             </div>
         );
