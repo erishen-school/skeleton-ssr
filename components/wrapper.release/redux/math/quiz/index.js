@@ -43,20 +43,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var ApiopenVideoRecommend = function (_BasePageComponent) {
-    _inherits(ApiopenVideoRecommend, _BasePageComponent);
+var MathQuiz = function (_BasePageComponent) {
+    _inherits(MathQuiz, _BasePageComponent);
 
-    function ApiopenVideoRecommend(props) {
-        _classCallCheck(this, ApiopenVideoRecommend);
+    function MathQuiz(props) {
+        _classCallCheck(this, MathQuiz);
 
-        var _this = _possibleConstructorReturn(this, (ApiopenVideoRecommend.__proto__ || Object.getPrototypeOf(ApiopenVideoRecommend)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (MathQuiz.__proto__ || Object.getPrototypeOf(MathQuiz)).call(this, props));
 
         _this.setRedux(_reducers2.default, actions);
-        console.log('ApiopenVideoRecommend', _util2.default.getLocationPrefix(), _util2.default.getUrlPrefix());
+        console.log('MathQuiz', _util2.default.getLocationPrefix(), _util2.default.getUrlPrefix());
         return _this;
     }
 
-    _createClass(ApiopenVideoRecommend, [{
+    _createClass(MathQuiz, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
             var _this2 = this;
@@ -80,13 +80,13 @@ var ApiopenVideoRecommend = function (_BasePageComponent) {
 
             return _react2.default.createElement(
                 'div',
-                { className: 'apiopen-videoRecommend' },
+                { className: 'math-quiz' },
                 _react2.default.createElement(_H1SkeletonComponent2.default, { item: recommendObj.length, loadingStatus: loadingStatus })
             );
         }
     }]);
 
-    return ApiopenVideoRecommend;
+    return MathQuiz;
 }(_BasePageComponent3.default);
 
-exports.default = ApiopenVideoRecommend;
+exports.default = MathQuiz;
