@@ -39,6 +39,7 @@
 2. webapp/skeleton => server - config - project.js - serverPrefix
 3. github => 
     client/config/github.js
+    client/config/static.js - github
     client/less/github_all.less
     client/less/github
     client/page/github
