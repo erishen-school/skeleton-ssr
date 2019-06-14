@@ -7,11 +7,29 @@ import _ from 'lodash';
 
 var serviceObj = {};
 
+var selectionRandomIndex = 0;
+
+var getSelectionRandomNum = function(num1, num2, num3, randomBegin, randomEnd){
+    var randomNum = util.getRandomNum(randomBegin, randomEnd);
+    if(randomNum != num1 && randomNum != num2 && randomNum != num3){
+        return randomNum;
+    } else {
+        if(selectionRandomIndex < 10){
+            selectionRandomIndex++;
+            getSelectionRandomNum(num1, num2, num3, randomBegin, randomEnd);
+        }
+        else {
+            return 0;
+        }
+    }
+};
+
 serviceObj.getMathQuiz = function() {
     return new Promise((resolve, reject)=>{
         if(typeof window != 'undefined') {
             let currentItem = window.localStorage.getItem('MATH_QUIZ_CURRENT_ITEM');
             if(currentItem == undefined){
+                selectionRandomIndex = 0;
                 const operators = ['+', '-'];
                 let operatorRandom = util.getRandomNum(0, 1);
                 let num1 = util.getRandomNum(1, 20);
@@ -19,6 +37,9 @@ serviceObj.getMathQuiz = function() {
                 let numTemp = 0;
                 let numOperator = '+';
                 let answer = 0;
+                let answer1 = 0;
+                let answer2 = 0;
+                let randomAnswer = 0;
                 let selection = [];
 
                 if (operators[operatorRandom] != undefined) {
@@ -34,21 +55,33 @@ serviceObj.getMathQuiz = function() {
                 switch (numOperator) {
                     case '+':
                         answer = num1 + num2;
-                        selection.push(util.getRandomNum(1, 40));
-                        selection.push(answer + 1);
-                        selection.push(answer - 1);
+                        answer1 = answer + 1;
+                        answer2 = answer - 1;
+                        selection.push(answer1);
+                        selection.push(answer2);
                         selection.push(answer);
+
+                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, 1, 40);
+                        if(randomAnswer != 0){
+                            selection.push(randomAnswer);
+                        }
                         selection = _.shuffle(selection);
                         break;
                     case '-':
                         answer = num1 - num2;
-                        selection.push(util.getRandomNum(1, 30));
-                        selection.push(answer + 1);
+                        answer1 = answer + 1;
                         if (answer > 1)
-                            selection.push(answer - 1);
+                            answer2 = answer - 1;
                         else
-                            selection.push(answer + 2);
+                            answer2 = answer + 2;
+                        selection.push(answer1);
+                        selection.push(answer2);
                         selection.push(answer);
+
+                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, 1, 30);
+                        if(randomAnswer != 0){
+                            selection.push(randomAnswer);
+                        }
                         selection = _.shuffle(selection);
                         break;
                 }
