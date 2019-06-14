@@ -30,6 +30,10 @@ var _util = require('../../../helper/util');
 
 var _util2 = _interopRequireDefault(_util);
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,7 +56,6 @@ var MathQuiz = function (_BasePageComponent) {
         var _this = _possibleConstructorReturn(this, (MathQuiz.__proto__ || Object.getPrototypeOf(MathQuiz)).call(this, props));
 
         _this.setRedux(_reducers2.default, actions);
-        console.log('MathQuiz', _util2.default.getLocationPrefix(), _util2.default.getUrlPrefix());
         return _this;
     }
 
@@ -65,23 +68,152 @@ var MathQuiz = function (_BasePageComponent) {
                 _this2.setState(_this2.store.getState());
             });
 
+            this.state.popupFlag = false;
+            this.state.answerFlag = false;
+
             if (!this.preloadedState || window.isStatic == 'true') {
-                this.action.getApiopenVideoRecommend(127398);
+                this.action.getMathQuiz();
+                this.action.getMathQuizItems();
             }
+        }
+    }, {
+        key: 'clickRow',
+        value: function clickRow(item) {
+            var _this3 = this;
+
+            var quiz = this.state.quiz;
+            var quizObj = quiz.quizObj;
+            //console.log('clickRow', item);
+
+            var answerFlag = false;
+            if (item == quizObj.answer) {
+                answerFlag = true;
+                quizObj.isRight = true;
+            }
+
+            quizObj.userAnswer = item;
+            this.action.setMathQuizItems(quizObj);
+            this.action.getMathQuiz();
+
+            this.setState({
+                popupFlag: true,
+                answerFlag: answerFlag
+            });
+
+            setTimeout(function () {
+                _this3.setState({
+                    popupFlag: false
+                });
+            }, 2000);
+        }
+    }, {
+        key: 'clickPopup',
+        value: function clickPopup() {
+            var popupFlag = this.state.popupFlag;
+
+            console.log('popupFlag', popupFlag);
+
+            this.setState({
+                popupFlag: !popupFlag
+            });
+        }
+    }, {
+        key: 'getQuestionSelectRow',
+        value: function getQuestionSelectRow(selection) {
+            var _this4 = this;
+
+            var content = [];
+            _lodash2.default.each(selection, function (item, index) {
+                content.push(_react2.default.createElement(
+                    'div',
+                    { key: "selection" + index, className: 'question-select-row', onClick: function onClick() {
+                            return _this4.clickRow(item);
+                        } },
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        item
+                    )
+                ));
+            });
+            return content;
         }
     }, {
         key: 'render',
         value: function render() {
-            var videoRecommend = this.state.videoRecommend;
-            var recommendObj = videoRecommend.recommendObj,
-                loadingStatus = videoRecommend.loadingStatus;
+            var _this5 = this;
 
-            console.log('recommendObj', recommendObj, loadingStatus);
+            var _state = this.state,
+                quiz = _state.quiz,
+                popupFlag = _state.popupFlag,
+                answerFlag = _state.answerFlag;
+            var quizObj = quiz.quizObj,
+                answerObj = quiz.answerObj;
+            var rightLen = answerObj.rightLen,
+                currentLen = answerObj.currentLen;
+
+
+            var rightRatio = 0;
+            if (currentLen > 0) {
+                rightRatio = parseInt(rightLen / currentLen * 100, 10);
+            }
 
             return _react2.default.createElement(
                 'div',
                 { className: 'math-quiz' },
-                _react2.default.createElement(_H1SkeletonComponent2.default, { item: recommendObj.length, loadingStatus: loadingStatus })
+                _react2.default.createElement(
+                    'div',
+                    { className: 'wrapper' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'quiz-area' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'question-row' },
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                quizObj.num1,
+                                ' ',
+                                quizObj.operator,
+                                ' ',
+                                quizObj.num2,
+                                ' = ?'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'question-select-area' },
+                            this.getQuestionSelectRow(quizObj.selection)
+                        )
+                    ),
+                    currentLen > 0 && _react2.default.createElement(
+                        'div',
+                        { className: 'answer-area' },
+                        '\u7B54\u9898\u6B63\u786E\u6570: ',
+                        rightLen,
+                        ' / ',
+                        currentLen,
+                        '   \u51C6\u786E\u7387: ',
+                        rightRatio,
+                        '%'
+                    )
+                ),
+                popupFlag && _react2.default.createElement(
+                    'div',
+                    { className: 'popup', onClick: function onClick() {
+                            return _this5.clickPopup();
+                        } },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'content' },
+                        _react2.default.createElement(
+                            'div',
+                            { className: 'wrapper' },
+                            answerFlag ? "恭喜你答对了" : "没事，继续加油"
+                        )
+                    )
+                )
             );
         }
     }]);

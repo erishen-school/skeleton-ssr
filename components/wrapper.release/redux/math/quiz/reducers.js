@@ -14,24 +14,40 @@ var _constants = require('./constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var videoRecommendState = {
-    recommendObj: {},
+var quizState = {
+    quizObj: {
+        num1: 0,
+        num2: 0,
+        operator: '+',
+        selection: [0, 0, 0, 0],
+        answer: 0
+    },
+    answerObj: {
+        rightLen: 0,
+        currentLen: 0
+    },
     loadingStatus: 'loading'
 }; /**
     * Created by lei_sun on 2019/6/6.
     */
 
 
-var videoRecommend = function videoRecommend() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : videoRecommendState;
+var quiz = function quiz() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : quizState;
     var action = arguments[1];
 
     var newState = _lodash2.default.cloneDeep(state);
 
     switch (action.type) {
-        case _constants.GET_APIOPEN_VIDEO_RECOMMEND_SUCCEEDED:
-            newState.recommendObj = action.recommendObj;
+        case _constants.GET_MATH_QUIZ_SUCCEEDED:
+            newState.quizObj = action.quizObj;
             newState.loadingStatus = 'done';
+            return newState;
+        case _constants.GET_MATH_QUIZ_ITEMS_SUCCEEDED:
+            newState.answerObj = action.answerObj;
+            return newState;
+        case _constants.SET_MATH_QUIZ_ITEMS_SUCCEEDED:
+            newState.answerObj = action.answerObj;
             return newState;
         default:
             return state;
@@ -39,7 +55,7 @@ var videoRecommend = function videoRecommend() {
 };
 
 var rootReducer = (0, _redux.combineReducers)({
-    videoRecommend: videoRecommend
+    quiz: quiz
 });
 
 exports.default = rootReducer;

@@ -52,7 +52,6 @@ var ApiopenVideoRecommend = function (_BasePageComponent) {
         var _this = _possibleConstructorReturn(this, (ApiopenVideoRecommend.__proto__ || Object.getPrototypeOf(ApiopenVideoRecommend)).call(this, props));
 
         _this.setRedux(_reducers2.default, actions);
-        console.log('ApiopenVideoRecommend', _util2.default.getLocationPrefix(), _util2.default.getUrlPrefix());
         return _this;
     }
 
@@ -65,9 +64,7 @@ var ApiopenVideoRecommend = function (_BasePageComponent) {
                 _this2.setState(_this2.store.getState());
             });
 
-            if (!this.preloadedState || window.isStatic == 'true') {
-                this.action.getApiopenVideoRecommend(127398);
-            }
+            if (!this.preloadedState || window.isStatic == 'true') {}
         }
     }, {
         key: 'render',
