@@ -124,17 +124,19 @@ var MathQuiz = function (_BasePageComponent) {
 
             var content = [];
             _lodash2.default.each(selection, function (item, index) {
-                content.push(_react2.default.createElement(
-                    'div',
-                    { key: "selection" + index, className: 'question-select-row', onClick: function onClick() {
-                            return _this4.clickRow(item);
-                        } },
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        item
-                    )
-                ));
+                if (item != undefined) {
+                    content.push(_react2.default.createElement(
+                        'div',
+                        { key: "selection" + index, className: 'question-select-row', onClick: function onClick() {
+                                return _this4.clickRow(item);
+                            } },
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            item
+                        )
+                    ));
+                }
             });
             return content;
         }
