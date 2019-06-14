@@ -1,16 +1,78 @@
 .math-quiz {
-  padding: 10px;
+  .wrapper {
+    padding: 10px;
+    .quiz-area {
+      .question-row {
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: 50px;
+        margin-bottom: 50px;
 
-  div {
-    padding-top: 5px;
-    padding-bottom: 5px;
+        &:extend(.ls-flex);
+        &:extend(.ls-flex1);
+        &:extend(.ls-row);
+        &:extend(.ls-justify-center);
+        &:extend(.ls-align-center);
+      }
+
+      .question-select-area {
+        .question-select-row {
+          font-size: 18px;
+          font-weight: normal;
+          height: 50px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          background-color: #9fcdff;
+          &:extend(.ls-flex);
+          &:extend(.ls-flex1);
+          &:extend(.ls-row);
+          &:extend(.ls-justify-start);
+          &:extend(.ls-align-center);
+
+          padding: 5px;
+        }
+
+        .even {
+          background-color: #17a2b8;
+        }
+      }
+    }
+
+    .answer-area {
+      &:extend(.ls-flex);
+      &:extend(.ls-flex1);
+      &:extend(.ls-row);
+      &:extend(.ls-justify-center);
+      &:extend(.ls-align-center);
+      height: 100px;
+    }
   }
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
 
-  h1 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #007aff;
-    font-size: 20px;
+    .content {
+      width: 100%;
+      height: 100%;
+      &:extend(.ls-flex);
+      &:extend(.ls-flex1);
+      &:extend(.ls-row);
+      &:extend(.ls-justify-center);
+      &:extend(.ls-align-center);
+
+      .wrapper {
+        float: left;
+        opacity: 1;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        border-radius: 5px;
+        background-color: #e0a800;
+      }
+    }
   }
 }

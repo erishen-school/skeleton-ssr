@@ -1,35 +1,93 @@
 /**
  * Created by lei_sun on 2019/6/6.
  */
-import apiopenService from '../../../services/apiopenService';
+import mathService from '../../../services/mathService';
 import {
-    GET_APIOPEN_VIDEO_RECOMMEND, GET_APIOPEN_VIDEO_RECOMMEND_SUCCEEDED, GET_APIOPEN_VIDEO_RECOMMEND_FAILED
+    GET_MATH_QUIZ, GET_MATH_QUIZ_SUCCEEDED, GET_MATH_QUIZ_FAILED,
+    GET_MATH_QUIZ_ITEMS, GET_MATH_QUIZ_ITEMS_SUCCEEDED, GET_MATH_QUIZ_ITEMS_FAILED,
+    SET_MATH_QUIZ_ITEMS, SET_MATH_QUIZ_ITEMS_SUCCEEDED, SET_MATH_QUIZ_ITEMS_FAILED
 } from './constants';
 
-export const getApiopenVideoRecommend = (obj) => {
+export const getMathQuiz = () => {
     return function(dispatch){
         dispatch({
-            type: GET_APIOPEN_VIDEO_RECOMMEND
+            type: GET_MATH_QUIZ
         });
 
-        apiopenService.getApiopenVideoRecommend(obj).then((response) => {
+        mathService.getMathQuiz().then((response) => {
             let params = {
-                recommendObj: null
+                quizObj: null
             };
 
             if(response){
-                params.recommendObj = response.result;
+                params.quizObj = response;
             }
 
             dispatch({
-                type: GET_APIOPEN_VIDEO_RECOMMEND_SUCCEEDED,
+                type: GET_MATH_QUIZ_SUCCEEDED,
                 ...params
             });
         }).catch((e)=>{
             dispatch({
-                type: GET_APIOPEN_VIDEO_RECOMMEND_FAILED,
+                type: GET_MATH_QUIZ_FAILED,
                 message: e.message
             });
         });
     };
 };
+
+export const getMathQuizItems = () => {
+    return function(dispatch){
+        dispatch({
+            type: GET_MATH_QUIZ_ITEMS
+        });
+
+        mathService.getMathQuizItems().then((response) => {
+            let params = {
+                answerObj: null
+            };
+
+            if(response){
+                params.answerObj = response;
+            }
+
+            dispatch({
+                type: GET_MATH_QUIZ_ITEMS_SUCCEEDED,
+                ...params
+            });
+        }).catch((e)=>{
+            dispatch({
+                type: GET_MATH_QUIZ_ITEMS_FAILED,
+                message: e.message
+            });
+        });
+    };
+};
+
+export const setMathQuizItems = (obj) => {
+    return function(dispatch){
+        dispatch({
+            type: SET_MATH_QUIZ_ITEMS
+        });
+
+        mathService.setMathQuizItems(obj).then((response) => {
+            let params = {
+                answerObj: null
+            };
+
+            if(response){
+                params.answerObj = response;
+            }
+
+            dispatch({
+                type: SET_MATH_QUIZ_ITEMS_SUCCEEDED,
+                ...params
+            });
+        }).catch((e)=>{
+            dispatch({
+                type: SET_MATH_QUIZ_ITEMS_FAILED,
+                message: e.message
+            });
+        });
+    };
+}
