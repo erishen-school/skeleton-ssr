@@ -68,11 +68,13 @@ export default class MathQuiz extends BasePageComponent {
     getQuestionSelectRow(selection){
         let content = [];
         _.each(selection, (item, index)=>{
-            content.push(
-                <div key={"selection"+index} class="question-select-row" onClick={()=>this.clickRow(item)}>
-                    <p>{item}</p>
-                </div>
-            );
+            if(item != undefined){
+                content.push(
+                    <div key={"selection"+index} class="question-select-row" onClick={()=>this.clickRow(item)}>
+                        <p>{item}</p>
+                    </div>
+                );
+            }
         });
         return content;
     }
