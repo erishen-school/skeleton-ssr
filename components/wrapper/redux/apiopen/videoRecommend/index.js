@@ -12,7 +12,6 @@ export default class ApiopenVideoRecommend extends BasePageComponent {
     constructor(props) {
         super(props);
         this.setRedux(reducers, actions);
-        console.log('ApiopenVideoRecommend', util.getLocationPrefix(), util.getUrlPrefix());
     }
 
     componentDidMount() {
@@ -21,7 +20,7 @@ export default class ApiopenVideoRecommend extends BasePageComponent {
         });
 
         if(!this.preloadedState || window.isStatic == 'true'){
-            this.action.getApiopenVideoRecommend(127398);
+
         }
     }
 
