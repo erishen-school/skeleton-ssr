@@ -29,31 +29,43 @@ export default class MathQuiz extends BasePageComponent {
         }
     }
 
-    clickRow(item){
-        const { quiz } = this.state;
-        const { quizObj } = quiz;
-        //console.log('clickRow', item);
+    clickRow(e, item){
+        console.log('clickRow', $(e.target));
+        const currentBackgroundColor = $(e.target).css('background-color');
 
-        let answerFlag = false;
-        if(item == quizObj.answer){
-            answerFlag = true;
-            quizObj.isRight = true;
+        if(currentBackgroundColor == 'rgb(255, 193, 193)'){
+            $(e.target).css('background-color', 'rgb(238, 180, 180)');
+        } else if(currentBackgroundColor == 'rgb(255, 106, 106)'){
+            $(e.target).css('background-color', 'rgb(238, 99, 99)');
         }
 
-        quizObj.userAnswer = item;
-        this.action.setMathQuizItems(quizObj);
-        this.action.getMathQuiz();
+        setTimeout(()=> {
+            const { quiz } = this.state;
+            const { quizObj } = quiz;
+            //console.log('clickRow', item);
 
-        this.setState({
-            popupFlag: true,
-            answerFlag: answerFlag
-        });
+            let answerFlag = false;
+            if(item == quizObj.answer){
+                answerFlag = true;
+                quizObj.isRight = true;
+            }
+
+            quizObj.userAnswer = item;
+            this.action.setMathQuizItems(quizObj);
+            this.action.getMathQuiz();
+
+            this.setState({
+                popupFlag: true,
+                answerFlag: answerFlag
+            });
+            $('.question-select-row').css('background-color', '');
+        }, 500);
 
         setTimeout(()=>{
             this.setState({
                 popupFlag: false
             });
-        }, 2000);
+        }, 2500);
     }
 
     clickPopup(){
@@ -69,8 +81,12 @@ export default class MathQuiz extends BasePageComponent {
         let content = [];
         _.each(selection, (item, index)=>{
             if(item != undefined){
+                let evenClass = '';
+                if(index % 2 == 0)
+                    evenClass = 'even';
+
                 content.push(
-                    <div key={"selection"+index} class="question-select-row" onClick={()=>this.clickRow(item)}>
+                    <div key={"selection"+index} class={"question-select-row " + evenClass} onClick={(e)=>this.clickRow(e, item)}>
                         <p>{item}</p>
                     </div>
                 );
@@ -107,7 +123,7 @@ export default class MathQuiz extends BasePageComponent {
                 {popupFlag && <div class="popup" onClick={()=>this.clickPopup()}>
                     <div class="content">
                         <div class="wrapper">
-                            {answerFlag ? "恭喜你答对了" : "没事，继续加油"}
+                            {answerFlag ? "恭喜你答对了" : "再接再励，继续努力"}
                         </div>
                     </div>
                 </div>}
