@@ -78,33 +78,45 @@ var MathQuiz = function (_BasePageComponent) {
         }
     }, {
         key: 'clickRow',
-        value: function clickRow(item) {
+        value: function clickRow(e, item) {
             var _this3 = this;
 
-            var quiz = this.state.quiz;
-            var quizObj = quiz.quizObj;
-            //console.log('clickRow', item);
+            console.log('clickRow', $(e.target));
+            var currentBackgroundColor = $(e.target).css('background-color');
 
-            var answerFlag = false;
-            if (item == quizObj.answer) {
-                answerFlag = true;
-                quizObj.isRight = true;
+            if (currentBackgroundColor == 'rgb(255, 193, 193)') {
+                $(e.target).css('background-color', 'rgb(238, 180, 180)');
+            } else if (currentBackgroundColor == 'rgb(255, 106, 106)') {
+                $(e.target).css('background-color', 'rgb(238, 99, 99)');
             }
 
-            quizObj.userAnswer = item;
-            this.action.setMathQuizItems(quizObj);
-            this.action.getMathQuiz();
+            setTimeout(function () {
+                var quiz = _this3.state.quiz;
+                var quizObj = quiz.quizObj;
+                //console.log('clickRow', item);
 
-            this.setState({
-                popupFlag: true,
-                answerFlag: answerFlag
-            });
+                var answerFlag = false;
+                if (item == quizObj.answer) {
+                    answerFlag = true;
+                    quizObj.isRight = true;
+                }
+
+                quizObj.userAnswer = item;
+                _this3.action.setMathQuizItems(quizObj);
+                _this3.action.getMathQuiz();
+
+                _this3.setState({
+                    popupFlag: true,
+                    answerFlag: answerFlag
+                });
+                $('.question-select-row').css('background-color', '');
+            }, 500);
 
             setTimeout(function () {
                 _this3.setState({
                     popupFlag: false
                 });
-            }, 2000);
+            }, 2500);
         }
     }, {
         key: 'clickPopup',
@@ -125,10 +137,13 @@ var MathQuiz = function (_BasePageComponent) {
             var content = [];
             _lodash2.default.each(selection, function (item, index) {
                 if (item != undefined) {
+                    var evenClass = '';
+                    if (index % 2 == 0) evenClass = 'even';
+
                     content.push(_react2.default.createElement(
                         'div',
-                        { key: "selection" + index, className: 'question-select-row', onClick: function onClick() {
-                                return _this4.clickRow(item);
+                        { key: "selection" + index, className: "question-select-row " + evenClass, onClick: function onClick(e) {
+                                return _this4.clickRow(e, item);
                             } },
                         _react2.default.createElement(
                             'p',
@@ -212,7 +227,7 @@ var MathQuiz = function (_BasePageComponent) {
                         _react2.default.createElement(
                             'div',
                             { className: 'wrapper' },
-                            answerFlag ? "恭喜你答对了" : "没事，继续加油"
+                            answerFlag ? "恭喜你答对了" : "再接再励，继续努力"
                         )
                     )
                 )

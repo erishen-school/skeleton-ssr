@@ -26,13 +26,16 @@ var serviceObj = {}; /**
 var selectionRandomIndex = 0;
 
 var getSelectionRandomNum = function getSelectionRandomNum(num1, num2, num3, randomBegin, randomEnd) {
+
+    if (randomBegin < 1) randomBegin = 1;
+
     var randomNum = _util2.default.getRandomNum(randomBegin, randomEnd);
     if (randomNum != num1 && randomNum != num2 && randomNum != num3) {
         return randomNum;
     } else {
         if (selectionRandomIndex < 10) {
             selectionRandomIndex++;
-            getSelectionRandomNum(num1, num2, num3, randomBegin, randomEnd);
+            return getSelectionRandomNum(num1, num2, num3, randomBegin, randomEnd);
         } else {
             return 0;
         }
@@ -76,7 +79,7 @@ serviceObj.getMathQuiz = function () {
                         selection.push(answer2);
                         selection.push(answer);
 
-                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, 1, 40);
+                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, answer - 3, answer + 3);
                         if (randomAnswer != 0) {
                             selection.push(randomAnswer);
                         }
@@ -90,7 +93,7 @@ serviceObj.getMathQuiz = function () {
                         selection.push(answer2);
                         selection.push(answer);
 
-                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, 1, 30);
+                        randomAnswer = getSelectionRandomNum(answer, answer1, answer2, answer - 4, answer + 4);
                         if (randomAnswer != 0) {
                             selection.push(randomAnswer);
                         }
