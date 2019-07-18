@@ -2,7 +2,7 @@
  * Created by lei_sun on 2018/2/28.
  */
 var util = require('./util');
-require('whatwg-fetch');
+var fetch = require('isomorphic-unfetch');
 
 var fetchObj = {};
 

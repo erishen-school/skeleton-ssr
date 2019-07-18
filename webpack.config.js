@@ -7,12 +7,14 @@ var packageConfig = require(path.resolve(__dirname, './package.json'));
 
 var happyThreadPool = HappyPack.ThreadPool({ size: 5 });
 var port = packageConfig.config.port;
-var publicPath = 'http://localhost:' + port + '/';
+var devhost = packageConfig.config.devhost;
+
+var publicPath = devhost + ':' + port + '/';
 var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 var entryObj = {};
 _.each(controllerConfig.entrys, function(item, index){
-    entryObj[item] = [ 'babel-polyfill', './client/page/' + item, hotMiddlewareScript ];
+    entryObj[item] = [ '@babel/polyfill', './client/page/' + item, hotMiddlewareScript ];
 });
 
 var devConfig = {

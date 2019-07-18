@@ -6,6 +6,6 @@ process.env.RELEASE = true;
 process.env.RELEASEDATE = 20190617;
 process.env.DEVELOPMENT = 0; // 默认 0
 process.env.WRAPPER = 'wrapper.release';
-require('babel-register');
-require("babel-polyfill");
+require('@babel/register');
+require("@babel/polyfill");
 require('./server.release');

@@ -9,7 +9,7 @@ var controllerConfig = require('./server/config/controller');
 
 var entryObj = {};
 _.each(controllerConfig.entrys, function(item, index){
-    entryObj[item] = [ 'babel-polyfill', './client/page/' + item ];
+    entryObj[item] = [ '@babel/polyfill', './client/page/' + item ];
 });
 
 var productionConfig = {
