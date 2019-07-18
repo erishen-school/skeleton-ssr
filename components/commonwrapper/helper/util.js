@@ -4,7 +4,7 @@
 var _ = require('lodash');
 var config = require('./config');
 var projectConfig = require('../../../server/config/project').default;
-var fetch = require('whatwg-fetch');
+var fetch = require('isomorphic-unfetch');
 var fetchHelper = require('./fetch');
 
 var numWordArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

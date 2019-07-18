@@ -10,6 +10,7 @@ import serverRoute from './routes/index';
 import bodyParser from 'body-parser';
 
 const port = packageConfig.config.port;
+const devhost = packageConfig.config.devhost;
 const serverPrefix = projectConfig.serverPrefix;
 
 const isRelease = process.env.RELEASE;
@@ -71,7 +72,7 @@ if (isDev) {
             ui: false,
             notify: false,
             proxy: {
-                target: 'localhost:' + port,
+                target: devhost + ':' + port,
                 ws: true
             },
             files: ['./server/views/**'],
