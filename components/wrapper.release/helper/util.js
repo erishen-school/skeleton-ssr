@@ -1,7 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
+
 var utilObj = require('../../commonwrapper/helper/util');
-exports.default = utilObj;
+
+var _default = utilObj;
+exports["default"] = _default;

@@ -1,85 +1,72 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports["default"] = _default;
 
-exports.default = function (app) {
-    app.use('/', indexRouter());
+var _project = _interopRequireDefault(require("../config/project"));
 
-    _lodash2.default.each(serverUrls, function (item, key) {
-        var url = item.url;
-        var ssr = item.ssr;
+var _slbhealthcheck = _interopRequireDefault(require("./slbhealthcheck"));
 
-        if (serverPrefix != '') {
-            var replaceUrl = serverPrefix.replace('*', url);
+var _api = _interopRequireDefault(require("./api"));
 
-            if (ssr) {
-                app.use(replaceUrl + '/', _ssr2.default);
-            } else {
-                app.use(replaceUrl + '/', indexRouter());
-            }
+var _ssr = _interopRequireDefault(require("./ssr"));
 
-            app.use(replaceUrl + '/slbhealthcheck*', _slbhealthcheck2.default);
-            app.use(replaceUrl + '/api', _api2.default);
-            app.use(replaceUrl + '/static', _static2.default);
+var _static = _interopRequireDefault(require("./static"));
 
-            if (ssr) {
-                app.use(replaceUrl + '/*', _ssr2.default);
-            } else {
-                app.use(replaceUrl + '/*', indexRouter());
-            }
-        }
-    });
-};
+var _util = _interopRequireDefault(require("./util"));
 
-var _project = require('../config/project');
+var _lodash = _interopRequireDefault(require("lodash"));
 
-var _project2 = _interopRequireDefault(_project);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _slbhealthcheck = require('./slbhealthcheck');
-
-var _slbhealthcheck2 = _interopRequireDefault(_slbhealthcheck);
-
-var _api = require('./api');
-
-var _api2 = _interopRequireDefault(_api);
-
-var _ssr = require('./ssr');
-
-var _ssr2 = _interopRequireDefault(_ssr);
-
-var _static = require('./static');
-
-var _static2 = _interopRequireDefault(_static);
-
-var _util = require('./util');
-
-var _util2 = _interopRequireDefault(_util);
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var serverPrefix = _project2.default.serverPrefix;
-var serverUrls = _project2.default.serverUrls;
+var serverPrefix = _project["default"].serverPrefix;
+var serverUrls = _project["default"].serverUrls;
 
 var utilGoRouter = function utilGoRouter(controller, params) {
-    if (params == undefined) {
-        params = {};
-    }
+  if (params == undefined) {
+    params = {};
+  }
 
-    if (controller == 'react') {
-        params.react = true;
-    }
+  if (controller == 'react') {
+    params.react = true;
+  }
 
-    return _util2.default.goRoute(controller, params);
+  return _util["default"].goRoute(controller, params);
 };
 
 var indexRouter = function indexRouter() {
-    return utilGoRouter('react');
+  return utilGoRouter('react');
 };
+
+function _default(app) {
+  app.use('/', indexRouter());
+
+  _lodash["default"].each(serverUrls, function (item, key) {
+    var url = item.url;
+    var ssr = item.ssr;
+
+    if (serverPrefix != '') {
+      var replaceUrl = serverPrefix.replace('*', url);
+
+      if (ssr) {
+        app.use(replaceUrl + '/', _ssr["default"]);
+      } else {
+        app.use(replaceUrl + '/', indexRouter());
+      }
+
+      app.use(replaceUrl + '/slbhealthcheck*', _slbhealthcheck["default"]);
+      app.use(replaceUrl + '/api', _api["default"]);
+      app.use(replaceUrl + '/static', _static["default"]);
+
+      if (ssr) {
+        app.use(replaceUrl + '/*', _ssr["default"]);
+      } else {
+        app.use(replaceUrl + '/*', indexRouter());
+      }
+    }
+  });
+}
 
 ;

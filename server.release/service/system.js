@@ -1,33 +1,38 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports["default"] = void 0;
 
-var _os = require('os');
+var _os = _interopRequireDefault(require("os"));
 
-var _os2 = _interopRequireDefault(_os);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+/**
+ * Created by lei_sun on 2018/1/4.
+ */
 var getIPAdress = function getIPAdress() {
-    var interfaces = _os2.default.networkInterfaces();
-    //console.log('interfaces', interfaces);
-    for (var devName in interfaces) {
-        //console.log('devName', devName);
-        if (devName.indexOf('VPN') == -1) {
-            var iface = interfaces[devName];
-            for (var i = 0; i < iface.length; i++) {
-                var alias = iface[i];
-                if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-                    return alias.address;
-                }
-            }
+  var interfaces = _os["default"].networkInterfaces(); //console.log('interfaces', interfaces);
+
+
+  for (var devName in interfaces) {
+    //console.log('devName', devName);
+    if (devName.indexOf('VPN') == -1) {
+      var iface = interfaces[devName];
+
+      for (var i = 0; i < iface.length; i++) {
+        var alias = iface[i];
+
+        if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+          return alias.address;
         }
+      }
     }
-}; /**
-    * Created by lei_sun on 2018/1/4.
-    */
-exports.default = {
-    getIPAdress: getIPAdress
+  }
 };
+
+var _default = {
+  getIPAdress: getIPAdress
+};
+exports["default"] = _default;

@@ -1,23 +1,20 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _express = require('express');
+var _express = _interopRequireDefault(require("express"));
 
-var _express2 = _interopRequireDefault(_express);
+var _version = _interopRequireDefault(require("../config/version"));
 
-var _version = require('../config/version');
-
-var _version2 = _interopRequireDefault(_version);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Created by lei_sun on 2018/2/9.
  */
-var router = _express2.default.Router();
+var router = _express["default"].Router();
 
 function showHTML(res, content) {
   res.writeHead(200, {
@@ -27,7 +24,7 @@ function showHTML(res, content) {
 }
 
 router.get('/', function (req, res) {
-  showHTML(res, 'version: ' + _version2.default);
+  showHTML(res, 'version: ' + _version["default"]);
 });
-
-exports.default = router;
+var _default = router;
+exports["default"] = _default;

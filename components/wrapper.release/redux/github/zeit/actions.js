@@ -1,46 +1,45 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.getGithubZeitNext = undefined;
+exports.getGithubZeitNext = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
-                                                                                                                                                                                                                                                                   * Created by lei_sun on 2019/6/6.
-                                                                                                                                                                                                                                                                   */
+var _githubService = _interopRequireDefault(require("../../../services/githubService"));
 
+var _constants = require("./constants");
 
-var _githubService = require('../../../services/githubService');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _githubService2 = _interopRequireDefault(_githubService);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-var _constants = require('./constants');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var getGithubZeitNext = function getGithubZeitNext(obj) {
+  return function (dispatch) {
+    dispatch({
+      type: _constants.GET_GITHUB_ZEIT_NEXT
+    });
 
-var getGithubZeitNext = exports.getGithubZeitNext = function getGithubZeitNext(obj) {
-    return function (dispatch) {
-        dispatch({
-            type: _constants.GET_GITHUB_ZEIT_NEXT
-        });
+    _githubService["default"].getGithubZeitNext(obj).then(function (response) {
+      var params = {
+        nextObj: null
+      };
 
-        _githubService2.default.getGithubZeitNext(obj).then(function (response) {
-            var params = {
-                nextObj: null
-            };
+      if (response) {
+        params.nextObj = response;
+      }
 
-            if (response) {
-                params.nextObj = response;
-            }
-
-            dispatch(_extends({
-                type: _constants.GET_GITHUB_ZEIT_NEXT_SUCCEEDED
-            }, params));
-        }).catch(function (e) {
-            dispatch({
-                type: _constants.GET_GITHUB_ZEIT_NEXT_FAILED,
-                message: e.message
-            });
-        });
-    };
+      dispatch(_objectSpread({
+        type: _constants.GET_GITHUB_ZEIT_NEXT_SUCCEEDED
+      }, params));
+    })["catch"](function (e) {
+      dispatch({
+        type: _constants.GET_GITHUB_ZEIT_NEXT_FAILED,
+        message: e.message
+      });
+    });
+  };
 };
+
+exports.getGithubZeitNext = getGithubZeitNext;

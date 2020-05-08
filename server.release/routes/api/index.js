@@ -1,48 +1,41 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports["default"] = void 0;
 
-var _express = require('express');
+var _express = _interopRequireDefault(require("express"));
 
-var _express2 = _interopRequireDefault(_express);
+var _moment = _interopRequireDefault(require("moment"));
 
-var _moment = require('moment');
+var _version = _interopRequireDefault(require("../../config/version"));
 
-var _moment2 = _interopRequireDefault(_moment);
+var _fetch = _interopRequireDefault(require("../../service/fetch"));
 
-var _version = require('../../config/version');
-
-var _version2 = _interopRequireDefault(_version);
-
-var _fetch = require('../../service/fetch');
-
-var _fetch2 = _interopRequireDefault(_fetch);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /**
  * Created by lei_sun on 2018/5/22.
  */
-var router = _express2.default.Router();
+var router = _express["default"].Router();
 
 router.use(function timeLog(req, res, next) {
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log((0, _moment2.default)().format('YYYY-MM-DD HH:mm:ss') + ' ' + fullUrl);
-    next();
+  var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  console.log((0, _moment["default"])().format('YYYY-MM-DD HH:mm:ss') + ' ' + fullUrl);
+  next();
 });
-
 router.get('/about', function (req, res) {
-    var obj = {};
-    obj.version = 'about: ' + _version2.default;
-    _fetch2.default.showJSON(res, obj);
-});
+  var obj = {};
+  obj.version = 'about: ' + _version["default"];
 
+  _fetch["default"].showJSON(res, obj);
+});
 router.get('/*', function (req, res) {
-    var obj = {};
-    obj.version = 'api: ' + _version2.default;
-    _fetch2.default.showJSON(res, obj);
-});
+  var obj = {};
+  obj.version = 'api: ' + _version["default"];
 
-exports.default = router;
+  _fetch["default"].showJSON(res, obj);
+});
+var _default = router;
+exports["default"] = _default;

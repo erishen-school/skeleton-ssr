@@ -1,7 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
+
 var encypterObj = require('../../commonwrapper/helper/encypter');
-exports.default = encypterObj;
+
+var _default = encypterObj;
+exports["default"] = _default;

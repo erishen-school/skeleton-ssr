@@ -1,7 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
+
 var storeObj = require('../../commonwrapper/redux/store');
-exports.default = storeObj;
+
+var _default = storeObj;
+exports["default"] = _default;

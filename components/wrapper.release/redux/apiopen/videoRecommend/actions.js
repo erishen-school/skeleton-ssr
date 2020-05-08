@@ -1,46 +1,45 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
-exports.getApiopenVideoRecommend = undefined;
+exports.getApiopenVideoRecommend = void 0;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /**
-                                                                                                                                                                                                                                                                   * Created by lei_sun on 2019/6/6.
-                                                                                                                                                                                                                                                                   */
+var _apiopenService = _interopRequireDefault(require("../../../services/apiopenService"));
 
+var _constants = require("./constants");
 
-var _apiopenService = require('../../../services/apiopenService');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _apiopenService2 = _interopRequireDefault(_apiopenService);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? Object(arguments[i]) : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-var _constants = require('./constants');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var getApiopenVideoRecommend = function getApiopenVideoRecommend(obj) {
+  return function (dispatch) {
+    dispatch({
+      type: _constants.GET_APIOPEN_VIDEO_RECOMMEND
+    });
 
-var getApiopenVideoRecommend = exports.getApiopenVideoRecommend = function getApiopenVideoRecommend(obj) {
-    return function (dispatch) {
-        dispatch({
-            type: _constants.GET_APIOPEN_VIDEO_RECOMMEND
-        });
+    _apiopenService["default"].getApiopenVideoRecommend(obj).then(function (response) {
+      var params = {
+        recommendObj: null
+      };
 
-        _apiopenService2.default.getApiopenVideoRecommend(obj).then(function (response) {
-            var params = {
-                recommendObj: null
-            };
+      if (response) {
+        params.recommendObj = response.result;
+      }
 
-            if (response) {
-                params.recommendObj = response.result;
-            }
-
-            dispatch(_extends({
-                type: _constants.GET_APIOPEN_VIDEO_RECOMMEND_SUCCEEDED
-            }, params));
-        }).catch(function (e) {
-            dispatch({
-                type: _constants.GET_APIOPEN_VIDEO_RECOMMEND_FAILED,
-                message: e.message
-            });
-        });
-    };
+      dispatch(_objectSpread({
+        type: _constants.GET_APIOPEN_VIDEO_RECOMMEND_SUCCEEDED
+      }, params));
+    })["catch"](function (e) {
+      dispatch({
+        type: _constants.GET_APIOPEN_VIDEO_RECOMMEND_FAILED,
+        message: e.message
+      });
+    });
+  };
 };
+
+exports.getApiopenVideoRecommend = getApiopenVideoRecommend;
