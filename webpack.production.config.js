@@ -33,14 +33,14 @@ var productionConfig = {
         rules: [{
             test: /\.(png|woff|woff2|eot|ttf|svg)$/,
             use: 'url-loader?limit=100000&context=client&name=[path][name].[ext]'
-        }, {
+        }, /*{
             test: /\.scss$/,
             exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: ['css-loader', 'resolve-url-loader', 'sass-loader?sourceMap']
             })
-        }, {
+        }, */{
             test: /\.less$/,
             exclude: /node_modules/,
             use: ExtractTextPlugin.extract({

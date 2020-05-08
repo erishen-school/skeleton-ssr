@@ -45,6 +45,11 @@ if (isDev) {
     var webpackDevConfig = require('../webpack.config.js');
     var compiler = webpack(webpackDevConfig);
 
+    const ignored = [
+        /[\\/]\.git[\\/]/,
+        /[\\/]node_modules[\\/]/
+    ];
+
     // attach to the compiler & the server
     app.use(serverPrefix, webpackDevMiddleware(compiler, {
         // public path should be the same with webpack config
@@ -52,9 +57,15 @@ if (isDev) {
         noInfo: true,
         stats: {
             colors: true
-        }
+        },
+        logLevel: 'silent',
+        watchOptions: { ignored },
+        //writeToDisk: true
     }));
-    app.use(webpackHotMiddleware(compiler));
+    app.use(webpackHotMiddleware(compiler, {
+        log: false,
+        heartbeat: 2500
+    }));
 
     app.use(serverPrefix, express.static(path.join(__dirname, publicDictionary)));
 
@@ -64,9 +75,10 @@ if (isDev) {
     require('reload')(server, app);
 
     // browsersync is a nice choice when modifying only views (with their css & js)
-    var bs = require('browser-sync').create();
+    //var bs = require('browser-sync').create();
 
     server.listen(port, function(){
+        /*
         bs.init({
             open: false,
             ui: false,
@@ -78,9 +90,11 @@ if (isDev) {
             files: ['./server/views/**'],
             port: port
         });
+        */
         console.log('App (dev) is going to be running on port ' + port + ' (by browsersync).');
     });
 
+    /*
     // 设置 Https
     var keyFile = path.join(__dirname, './privatekey.pem');
     var certFile = path.join(__dirname, './certrequest.pem');
@@ -99,6 +113,7 @@ if (isDev) {
             console.log('Https (dev) is now running on port ' + httpsPort + '!');
         });
     }
+    */
 } else {
     // static wildsAssets served by express.static() for production
     app.use(serverPrefix, express.static(path.join(__dirname, publicDictionary)));

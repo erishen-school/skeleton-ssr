@@ -30,11 +30,11 @@ var devConfig = {
         rules: [{
             test: /\.(png|woff|woff2|eot|ttf|svg)$/,
             use: 'url-loader?limit=100000&context=client&name=[path][name].[ext]'
-        }, {
+        }, /*{
             test: /\.scss$/,
             exclude: /node_modules/,
             use: 'happypack/loader?id=scss'
-        }, {
+        }, */{
             test: /\.less$/,
             exclude: /node_modules/,
             use: 'happypack/loader?id=less'
@@ -57,11 +57,13 @@ var devConfig = {
             threadPool: happyThreadPool,
             loaders: [ 'style-loader', 'css-loader?sourceMap', 'resolve-url-loader', 'less-loader?sourceMap' ]
         }),
+        /*
         new HappyPack({
             id: 'scss',
             threadPool: happyThreadPool,
             loaders: [ 'style-loader', 'css-loader?sourceMap', 'resolve-url-loader', 'sass-loader?sourceMap' ]
         }),
+        */
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./manifest.json')
