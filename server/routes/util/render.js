@@ -83,7 +83,7 @@ obj.renderFullPage = function(params){
     }
 
     //console.log('wrapperDic', wrapperDic);
-    
+
     //if((!isRelease && !queryRelease) || (isDevelopment == 1)){
         _.each(serverUrls, (item, key) => {
             const url = item.url;
@@ -127,7 +127,7 @@ obj.renderFullPage = function(params){
                     _.each(links, (linkItem, linkKey)=>{
                         linkContent.push(`<link rel="stylesheet" href="${webresourceBaseUrl}css/${linkItem}?v=${pageVersion}" />`);
                     });
-                    cssHref = `${linkContent}`;
+                    cssHref = `${linkContent.join('')}`;
                 }
 
                 if(scripts){
@@ -135,7 +135,7 @@ obj.renderFullPage = function(params){
                     _.each(scripts, (scriptItem, scriptKey)=>{
                         scriptContent.push(`<script type="text/javascript" src="${webresourceBaseUrl}js/${scriptItem}?v=${pageVersion}"></script>`);
                     });
-                    scriptHref = `${scriptContent}`;
+                    scriptHref = `${scriptContent.join('')}`;
                 }
             }
         });
